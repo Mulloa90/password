@@ -45,7 +45,6 @@ function writePassword() {
   if (passPrompts) {
     var newPassword = generatePassword();
     var passwordText = document.querySelector("#password");
-
     passwordText.value = newPassword;
   }
 }
@@ -57,7 +56,7 @@ function generatePassword(){
     return
   }
   for(var i = 1; i < characterLength; i++) {
-    var numbered = (Math.numbered() * chooseArray.length);
+    var numbered = Math.floor(Math.random() * chooseArray.length);
     password = password + chooseArray[numbered];
   }
    return password;
