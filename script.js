@@ -13,40 +13,55 @@ var generateBtn = document.querySelector("#generate");
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+// used parseInt to return character 
+function getPrompts() {
+  chooseArray = [];
+
+  characterLength = parseInt(prompt("Choose password character length (8-128 charaters)"));
+
+  if(isNaN(characterLength) || characterLength < 8 || characterLength > 128) {
+  alert("Type selection using numeric keys only between 8-128");
+  return false;
+  }
+
+  if (confirm("Would you like to include lower case letters in your password")) {
+  chooseArray = chooseArray.concat(lowerCaseArray);
+  }
+
+  if (confirm("Would you like to include Upper case letters in your password")) {
+  chooseArray = chooseArray.concat(upperCaseArray);
+  }
+
+  if (confirm("Would you like to include Numbers in your password")) {
+  chooseArray = chooseArray.concat(numberArray);
+  }
+  return true;
+}
+
 // Write password to the #password input
 function writePassword() {
   var passPrompts = getPrompts(); //boolean
-
+  
   if (passPrompts) {
-    var password = generatePassword();
+    var newPassword = generatePassword();
     var passwordText = document.querySelector("#password");
 
-    passwordText.value = password;
+    passwordText.value = newPassword;
+  }
 }
-
-// I get password based on prompt answers
+// I get password based on prompt answers cited from example in w3schools
 function generatePassword(){
- var password = "";
-}
-// used parseInt to return character 
-function getPrompts(){
-    chooseArray = [];
-    characterLength = parseInt(prompt("Choose password character length (8-128 charaters)"));
-    if(isNaN(characterLength) || characterLength < 8 || characterLength > 128) {
-    alert("Type selection using numeric keys only between 8-128")
-    return false;
-    }
+  var password = "";
+  if(isNaN(characterLength) || characterLength < 8 || characterLength > 128) {
+    alert("Type selection using numeric keys only between 8-128");
+    return
+  }
+  for(var i = 1; i < characterLength; i++) {
+    var numbered = (Math.numbered() * chooseArray.length);
+    password = password + chooseArray[numbered];
+  }
+   return password;
+ 
+ 
 
-    if (confirm("Would you like to include lower case letters in your password")){
-    chooseArray = chooseArray.concat(lowerCaseArray);
-    }
-
-    if (confirm("Would you like to include Upper case letters in your password")){
-    chooseArray = chooseArray.concat(upperCaseArray);
-    }
-
-    if (confirm("Would you like to include Numbers in your password")){
-    chooseArray = chooseArray.concat(numberArray);
-    }
-    return true;
 }
